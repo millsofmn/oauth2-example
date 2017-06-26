@@ -24,7 +24,7 @@ security:
 
 logging:
   level:
-    edu.mayo.dlmp.example: DEBUG
+    com.millsofmn.example: DEBUG
     org.springframework.security: DEBUG
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
