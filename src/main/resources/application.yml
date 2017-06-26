@@ -1,0 +1,30 @@
+server:
+  contextPath: /${CONTEXT_PATH}
+  port: 8443
+  ssl:
+    key-store: ${USERPROFILE}\.keystore
+    key-store-password: changeit
+    keyStoreType: JKS
+    keyAlias: tomcat
+
+security:
+  oauth2:
+    client:
+      clientId: ${ADFS_CLIENT_ID}
+      userAuthorizationUri: https://${ADFS_URL}/adfs/oauth2/authorize?resource=https://${SERVER}:8443/${CONTEXT_PATH}/
+      accessTokenUri: https://${ADFS_URL}/adfs/oauth2/token
+      clientAuthenticationScheme: form
+      authorizedGrantTypes: authorization_code
+      preEstablishedRedirectUri: https://${SERVER}:8443/${CONTEXT_PATH}/login
+      useCurrentUri: false
+      tokenName: code
+      authenticationScheme: query
+    resource:
+      userInfoUri: https://${ADFS_URL}/adfs/oauth2/token
+
+logging:
+  level:
+    edu.mayo.dlmp.example: DEBUG
+    org.springframework.security: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
